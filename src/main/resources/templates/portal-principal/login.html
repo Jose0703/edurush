@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Acceso</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+    <style>
+        body { background: #f0f2f5; }
+        .login-section { min-height: 80vh; display: flex; align-items: center; }
+        .login-card { border-radius: 1.5rem; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; }
+        .btn-login { border-radius: 0.75rem; padding: 0.75rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container login-section">
+        <div class="row justify-content-center w-100">
+            <div class="col-md-5 col-lg-4">
+                <div class="card login-card p-4">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-graduation-cap fa-4x text-primary mb-2"></i>
+                        <h2 class="fw-bold text-primary">EduRush</h2>
+                        <small class="text-muted">Inicia sesión para continuar</small>
+                    </div>
+
+                    <div th:if="${param.error}" class="alert alert-danger py-2 text-center" style="font-size: 0.9rem;">
+                        Credenciales incorrectas o cuenta inactiva.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-info py-2 text-center" style="font-size: 0.9rem;">
+                        Has cerrado sesión correctamente.
+                    </div>
+
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Correo Electrónico</label>
+                            <input type="email" name="username" class="form-control form-control-lg" placeholder="usuario@edurush.pe" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Contraseña</label>
+                            <input type="password" name="password" class="form-control form-control-lg" placeholder="••••••••" required>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-login shadow-sm">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
