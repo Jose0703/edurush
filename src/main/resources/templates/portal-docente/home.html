@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Portal Docente</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+    <div class="container mt-5">
+        <div class="row align-items-center bg-white p-5 rounded-4 shadow-sm border-start border-primary border-5">
+            <div class="col-md-8">
+                <h1 class="fw-bold text-primary">¡Hola, Docente!</h1>
+                <p class="lead">Aquí podrás gestionar tus sesiones de clase y subir calificaciones.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-chalkboard-teacher fa-6x text-primary-emphasis"></i>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>

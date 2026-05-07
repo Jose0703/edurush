@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Mi Portal</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+    <div class="container mt-5">
+        <div class="row g-4">
+            <div class="col-md-12">
+                <div class="alert alert-info border-0 shadow-sm">
+                    <strong>Aviso:</strong> Tienes 3 tareas pendientes para esta semana.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-edurush p-4">
+                    <h5 class="fw-bold"><i class="fas fa-calendar-alt me-2 text-primary"></i>Mi Horario</h5>
+                    <p>Consulta tus próximas clases programadas.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-edurush p-4">
+                    <h5 class="fw-bold"><i class="fas fa-graduation-cap me-2 text-primary"></i>Mis Notas</h5>
+                    <p>Verifica tu progreso académico del ciclo actual.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
