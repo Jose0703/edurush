@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Formulario Usuario</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-edurush">
+                    <div class="card-header bg-white border-0 pt-4">
+                        <h4 class="fw-bold text-center text-primary" th:text="${titulo}"></h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/usuarios/guardar}" th:object="${usuario}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Correo Institucional</label>
+                                <input type="email" th:field="*{correo}" class="form-control form-control-lg" placeholder="ejemplo@edurush.pe" required>
+                            </div>
+                            
+                            <div class="mb-3" th:if="${usuario.id == null}">
+                                <label class="form-label fw-bold text-secondary">Contraseña Temporal</label>
+                                <input type="password" th:field="*{password}" class="form-control form-control-lg" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Rol de Sistema</label>
+                                    <select th:field="*{rol}" class="form-select">
+                                        <option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.nombre}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Estado</label>
+                                    <select th:field="*{estado}" class="form-select text-capitalize">
+                                        <option value="activo">Activo</option>
+                                        <option value="suspendido">Suspendido</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">Guardar Usuario</button>
+                                <a th:href="@{/admin/usuarios}" class="btn btn-link text-decoration-none">Regresar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
