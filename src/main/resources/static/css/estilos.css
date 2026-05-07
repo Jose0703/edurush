@@ -1,0 +1,107 @@
+/* =========================================
+   VARIABLES GLOBALES EDURUSH
+   ========================================= */
+:root {
+    --azul-primary: #0d6efd;    /* Azul exacto de Bootstrap */
+    --negro-cabecera: #212529;  /* Negro elegante */
+    --blanco: #ffffff;
+    --gris-fondo: #f8f9fa;
+    --azul-suave: rgba(13, 110, 253, 0.04);
+}
+
+/* =========================================
+   ESTILOS GENERALES
+   ========================================= */
+body {
+    background-color: var(--gris-fondo);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+/* =========================================
+   NAVBAR PERSONALIZADO
+   ========================================= */
+.navbar-custom {
+    background-color: var(--azul-primary) !important;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: var(--blanco) !important;
+}
+
+.navbar-custom .nav-link:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* =========================================
+   CONTENEDORES Y TARJETAS
+   ========================================= */
+.card-edurush {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    background-color: var(--blanco);
+    overflow: hidden; /* Mantiene los bordes redondeados */
+}
+
+/* Contenedor de la tabla para bordes redondeados */
+.rounded-table-container {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+
+/* =========================================
+   TABLA CON CABECERA NEGRA (ESTILO PRO)
+   ========================================= */
+
+/* Forzar el fondo negro y letras blancas en el thead */
+.table thead.table-dark-custom th {
+    background-color: var(--negro-cabecera) !important;
+    color: var(--blanco) !important;
+    border: none !important;
+    padding: 15px 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    vertical-align: middle;
+}
+
+/* Estilo striped (filas intercaladas) */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--azul-suave);
+}
+
+/* Efecto hover en las filas */
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.08);
+    transition: background-color 0.2s ease;
+}
+
+/* Alineación de celdas */
+.table td {
+    padding: 12px 10px;
+    color: #444;
+}
+
+/* =========================================
+   BOTONES Y COMPONENTES
+   ========================================= */
+.btn-primary {
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+}
