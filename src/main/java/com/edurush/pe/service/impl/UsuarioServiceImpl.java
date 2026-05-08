@@ -25,12 +25,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario guardar(Usuario usuario) {
-        if (usuario.getId() == null) {
-            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
+            String passwordEncriptado = passwordEncoder.encode(usuario.getPassword());
+            usuario.setPassword(passwordEncriptado);
         }
+        
         return usuarioRepo.save(usuario);
     }
-
     @Override
     public Usuario buscarPorId(Integer id) {
         return usuarioRepo.findById(id).orElse(null);

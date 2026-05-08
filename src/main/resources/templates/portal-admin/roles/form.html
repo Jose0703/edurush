@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Formulario Rol</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card card-edurush">
+                    <div class="card-header bg-white border-0 pt-4">
+                        <h4 class="fw-bold text-center text-primary" th:text="${titulo}"></h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/roles/guardar}" th:object="${rol}" method="post">
+                            <input type="hidden" th:field="*{idRol}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Nombre del Rol</label>
+                                <input type="text" th:field="*{nombre}" class="form-control form-control-lg" placeholder="Ej: ADMINISTRADOR" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Estado</label>
+                                <select th:field="*{estado}" class="form-select">
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">Guardar Rol</button>
+                                <a th:href="@{/admin/roles}" class="btn btn-link text-decoration-none">Regresar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>

@@ -7,43 +7,126 @@
 <body>
     <div th:replace="~{fragments/layout :: navbar_principal}"></div>
 
-    <div class="container mt-5">
-        <div class="row mb-4">
-            <div class="col-12">
-                <h2 class="fw-bold">Bienvenido, Administrador</h2>
-                <p class="text-muted">Gestión global del sistema EduRush.</p>
-            </div>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card card-edurush p-4 text-center h-100">
-                    <i class="fas fa-users-cog fa-3x text-primary mb-3"></i>
-                    <h4>Usuarios</h4>
-                    <p class="small text-muted">Gestionar cuentas, roles y accesos al sistema.</p>
-                    <a th:href="@{/admin/usuarios}" class="btn btn-primary mt-auto">Ir a Usuarios</a>
-                </div>
-            </div>
+    <div class="container mt-5 pb-5">
+        <div class="card card-edurush border-0 shadow-lg p-4 p-md-5">
             
-            <div class="col-md-4">
-                <div class="card card-edurush p-4 text-center h-100">
-                    <i class="fas fa-book fa-3x text-success mb-3"></i>
-                    <h4>Cursos</h4>
-                    <p class="small text-muted">Configuración de mallas curriculares y asignaturas.</p>
-                    <button class="btn btn-outline-success mt-auto" disabled>Próximamente</button>
+            <div class="row mb-5 border-bottom pb-4">
+                <div class="col-12 text-center text-md-start">
+                    <h2 class="fw-bold text-dark"><i class="fas fa-th-large me-2 text-primary"></i>Panel de Administración Global</h2>
+                    <p class="text-muted">Gestione todos los módulos del sistema desde un solo lugar.</p>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card card-edurush p-4 text-center h-100">
-                    <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
-                    <h4>Reportes</h4>
-                    <p class="small text-muted">Estadísticas de matriculados y rendimiento.</p>
-                    <button class="btn btn-outline-warning mt-auto" disabled>Próximamente</button>
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card card-edurush h-100 border-start border-primary border-5 hover-elevate">
+                        <div class="card-body text-center p-4">
+                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block mb-3">
+                                <i class="fas fa-users-cog fa-2x text-primary"></i>
+                            </div>
+                            <h5 class="fw-bold">Usuarios</h5>
+                            <p class="small text-muted">Accesos, credenciales y estados de cuenta.</p>
+                            <a th:href="@{/admin/usuarios}" class="btn btn-primary w-100 shadow-sm mt-2">Gestionar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card card-edurush h-100 border-start border-info border-5 hover-elevate">
+                        <div class="card-body text-center p-4">
+                            <div class="rounded-circle bg-info bg-opacity-10 p-3 d-inline-block mb-3">
+                                <i class="fas fa-user-shield fa-2x text-info"></i>
+                            </div>
+                            <h5 class="fw-bold">Roles</h5>
+                            <p class="small text-muted">Niveles de seguridad y permisos de sistema.</p>
+                            <a th:href="@{/admin/roles}" class="btn btn-info text-white w-100 shadow-sm mt-2">Gestionar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-edurush h-100 border-start border-success border-5 hover-elevate">
+                        <div class="card-body text-center p-4">
+                            <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-block mb-3">
+                                <i class="fas fa-user-graduate fa-2x text-success"></i>
+                            </div>
+                            <h5 class="fw-bold">Estudiantes</h5>
+                            <p class="small text-muted">Legajos de alumnos y datos de contacto.</p>
+                            <a th:href="@{/admin/estudiantes}" class="btn btn-success w-100 shadow-sm mt-2">Gestionar</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="card card-edurush h-100 border-start border-indigo border-5" style="border-left-color: #6610f2 !important;">
+                        <div class="card-body p-4 d-flex align-items-center">
+                            <div class="bg-indigo bg-opacity-10 p-3 rounded me-4" style="background-color: rgba(102, 16, 242, 0.1);">
+                                <i class="fas fa-file-signature fa-3x" style="color: #6610f2;"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold mb-1">Matrículas</h5>
+                                <p class="small text-muted mb-2">Inscripción de alumnos a periodos lectivos.</p>
+                                <button class="btn btn-sm text-white px-3" style="background-color: #6610f2;" disabled>Próximamente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-edurush h-100 border-start border-teal border-5" style="border-left-color: #20c997 !important;">
+                        <div class="card-body p-4 d-flex align-items-center">
+                            <div class="bg-teal bg-opacity-10 p-3 rounded me-4" style="background-color: rgba(32, 201, 151, 0.1);">
+                                <i class="fas fa-chalkboard-teacher fa-3x" style="color: #20c997;"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold mb-1">Docentes</h5>
+                                <p class="small text-muted mb-2">Padrón de instructores y asignación de cursos.</p>
+                                <button class="btn btn-sm text-white px-3" style="background-color: #20c997;" disabled>Próximamente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card card-edurush p-3 border-start border-secondary border-4 bg-light">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-university text-secondary me-2"></i>Carreras</span>
+                            <span class="badge bg-secondary">Próximamente</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-edurush p-3 border-start border-dark border-4 bg-light">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-book text-dark me-2"></i>Cursos</span>
+                            <span class="badge bg-dark">Próximamente</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-edurush p-3 border-start border-warning border-4 bg-light">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-money-bill-wave text-warning me-2"></i>Pagos</span>
+                            <span class="badge bg-warning text-dark">Próximamente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-edurush border-danger border-1 p-3 bg-danger bg-opacity-10 text-center">
+                        <span class="text-danger fw-bold"><i class="fas fa-chart-pie me-2"></i>Módulo de Reportes y Estadísticas (En planificación)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div> </div>
+
     <div th:replace="~{fragments/layout :: scripts_imports}"></div>
 </body>
 </html>

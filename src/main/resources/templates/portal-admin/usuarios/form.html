@@ -16,23 +16,28 @@
                     </div>
                     <div class="card-body p-4">
                         <form th:action="@{/admin/usuarios/guardar}" th:object="${usuario}" method="post">
-                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{idUsuario}">
                             
                             <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary">Correo Institucional</label>
                                 <input type="email" th:field="*{correo}" class="form-control form-control-lg" placeholder="ejemplo@edurush.pe" required>
                             </div>
                             
-                            <div class="mb-3" th:if="${usuario.id == null}">
-                                <label class="form-label fw-bold text-secondary">Contraseña Temporal</label>
-                                <input type="password" th:field="*{password}" class="form-control form-control-lg" required>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Contraseña</label>
+                                <input type="password" th:field="*{password}" class="form-control form-control-lg" 
+                                       th:placeholder="${usuario.idUsuario == null ? 'Nueva contraseña' : 'Nueva contraseña o actual'}" 
+                                       required>
+                                <small class="text-muted" th:if="${usuario.idUsuario != null}">
+                                    Si editas, debes volver a ingresar la contraseña para confirmar.
+                                </small>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold text-secondary">Rol de Sistema</label>
                                     <select th:field="*{rol}" class="form-select">
-                                        <option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.nombre}"></option>
+                                        <option th:each="r : ${roles}" th:value="${r.idRol}" th:text="${r.nombre}"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">

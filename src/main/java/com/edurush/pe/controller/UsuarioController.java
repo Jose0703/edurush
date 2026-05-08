@@ -52,7 +52,7 @@ public class UsuarioController {
         usuarioService.guardar(usuario);
         return "redirect:/admin/usuarios";
     }
-
+    
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Integer id) {
         usuarioService.eliminar(id);

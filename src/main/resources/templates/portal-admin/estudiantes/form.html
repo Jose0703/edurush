@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Formulario Estudiante</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-edurush">
+                    <div class="card-header bg-white border-0 pt-4">
+                        <h4 class="fw-bold text-center text-primary" th:text="${titulo}"></h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/estudiantes/guardar}" th:object="${estudiante}" method="post">
+                            <input type="hidden" th:field="*{idEstudiante}">
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Nombres</label>
+                                    <input type="text" th:field="*{nombres}" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Apellidos</label>
+                                    <input type="text" th:field="*{apellidos}" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label fw-bold text-secondary">DNI</label>
+                                    <input type="text" th:field="*{dni}" class="form-control" maxlength="8" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Celular</label>
+                                    <input type="text" th:field="*{celular}" class="form-control" maxlength="9" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label fw-bold text-secondary">ID Usuario (Relación)</label>
+                                    <input type="number" th:field="*{idUsuario}" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Correo Personal / Contacto</label>
+                                <input type="email" th:field="*{email}" class="form-control" placeholder="estudiante@gmail.com">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Fecha Nacimiento</label>
+                                    <input type="date" th:field="*{fechaNacimiento}" class="form-control">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Estado</label>
+                                    <select th:field="*{estado}" class="form-select">
+                                        <option value="activo">Activo</option>
+                                        <option value="inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">Guardar Estudiante</button>
+                                <a th:href="@{/admin/estudiantes}" class="btn btn-link text-decoration-none">Regresar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
