@@ -1,4 +1,4 @@
-package com.edurush.pe.serviceImplement;
+package com.edurush.pe.service.impl;
 
 import com.edurush.pe.model.Estudiante;
 import com.edurush.pe.repository.EstudianteRepository;
