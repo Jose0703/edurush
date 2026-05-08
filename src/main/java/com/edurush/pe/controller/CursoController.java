@@ -20,7 +20,7 @@ public class CursoController {
 
         model.addAttribute("cursos", service.listar());
 
-        return "cursos";
+        return "portal-admin/cursos/cursos";
     }
 
     @GetMapping("/nuevo")
@@ -28,7 +28,7 @@ public class CursoController {
 
         model.addAttribute("curso", new Curso());
 
-        return "form-curso";
+        return "portal-admin/cursos/form-curso";
     }
 
     @PostMapping("/guardar")
@@ -48,22 +48,23 @@ public class CursoController {
 
         model.addAttribute("curso", service.buscarPorId(id));
 
-        return "form-curso";
+        return "portal-admin/cursos/form-curso";
     }
 
-    @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable Integer id) {
-
-        service.eliminar(id);
-
-        return "redirect:/cursos";
-    }
 
     @GetMapping("/detalle/{id}")
     public String detalle(@PathVariable Integer id, Model model) {
 
         model.addAttribute("curso", service.buscarPorId(id));
 
-        return "detalle-curso";
+        return "portal-admin/cursos/detalle-curso";
+    }
+    
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id) {
+
+        service.eliminar(id);
+
+        return "redirect:/cursos";
     }
 }

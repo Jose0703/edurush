@@ -18,13 +18,15 @@ public class CarreraController {
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("carreras", service.listar());
-        return "carreras";
+        
+        return "portal-admin/carreras/carreras";
     }
 
     @GetMapping("/nuevo")
     public String nuevo(Model model) {
         model.addAttribute("carrera", new Carrera());
-        return "form-carrera";
+        
+        return "portal-admin/carreras/form-carrera";
     }
 
     @PostMapping("/guardar")
@@ -41,7 +43,8 @@ public class CarreraController {
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Integer id, Model model) {
         model.addAttribute("carrera", service.buscarPorId(id));
-        return "form-carrera";
+        
+        return "portal-admin/carreras/form-carrera";
     }
     
     @GetMapping("/detalle/{id}")
@@ -49,7 +52,7 @@ public class CarreraController {
 
         model.addAttribute("carrera", service.buscarPorId(id));
 
-        return "detalle-carrera";
+        return "portal-admin/carreras/detalle-carrera";
     }
 
     @GetMapping("/eliminar/{id}")
