@@ -17,7 +17,7 @@ public class EstudianteServiceImplement implements EstudianteService {
     @Override
     public ResponseEntity<Map<String, Object>> listarEstudiante() {
         Map<String, Object> response = new LinkedHashMap<>();
-        List<Estudiante> estudiantes = estudianteRepository.findAll();
+        List<Estudiante> estudiantes = estudianteRepository.findByEstado("activo");
         if(estudiantes.isEmpty()){
             response.put("mensaje", "No se encontraron estudiantes");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
@@ -25,6 +25,18 @@ public class EstudianteServiceImplement implements EstudianteService {
         response.put("mensaje", "Lista de estudiantes");
         response.put("estudiantes", estudiantes);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> buscarPorNombreApellido(String texto) {
+        List<Estudiante> lista = estudianteRepository.buscarPorNombreApellido(texto);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensaje", "Resultados encontrados");
+        response.put("cantidad", lista.size());
+        response.put("data", lista);
+
+        return ResponseEntity.ok(response);
     }
 
     @Override
@@ -47,31 +59,52 @@ public class EstudianteServiceImplement implements EstudianteService {
     }
 
     @Override
-    public ResponseEntity<?> obtenerEstudiantePorId(Integer id) {
-        Optional<Estudiante> estudiante = estudianteRepository.findById(id);
+    public ResponseEntity<Map<String, Object>> editarEstudiante(Estudiante estudiante, Integer id) {
+        Map<String, Object> response = new HashMap<>();
+        Optional<Estudiante> estudianteExistente = estudianteRepository.findById(id);
 
-        if(estudiante.isPresent()){
+        if (estudianteExistente.isPresent()) {
+            Estudiante estudianteActual = estudianteExistente.get();
 
-            return ResponseEntity.ok(estudiante.get());
+            if (estudiante.getNombres() == null || estudiante.getNombres().isEmpty()) {
+                response.put("mensaje", "El nombre del estudiante no puede estar vacío.");
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);			}
 
-        }else{
+            estudianteActual.setNombres(estudiante.getNombres());
+            estudianteActual.setApellidos(estudiante.getApellidos());
+            estudianteActual.setDni(estudiante.getDni());
+            estudianteActual.setCelular(estudiante.getCelular());
+            estudianteActual.setEmail(estudiante.getEmail());
+            estudianteActual.setFechaNacimiento(estudiante.getFechaNacimiento());
+            estudianteActual.setFechaRegistro(estudiante.getFechaRegistro());
+            estudianteActual.setEstado(estudiante.getEstado());
 
-            Map<String, Object> response = new HashMap<>();
+            estudianteRepository.save(estudianteActual);
 
-            response.put("mensaje", "Estudiante no encontrado.");
-
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-
+            response.put("estudiante", estudianteActual);
+            response.put("mensaje", "Datos del estudiante modificados.");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } else {
+            response.put("mensaje", "Sin registros con ID: " + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
-
     @Override
-    public ResponseEntity<Map<String, Object>> editarEstudiante(Estudiante estudiente, Long id) {
-        return null;
+    public ResponseEntity<Map<String, Object>> eliminarEstudiante(Integer id) {
+        Map<String, Object> response = new HashMap<>();
+
+        Optional<Estudiante> estudianteOpt = estudianteRepository.findById(id);
+
+        if (estudianteOpt.isEmpty()) {
+            response.put("mensaje", "Estudiante no encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        estudianteRepository.deleteById(id);
+
+        response.put("mensaje", "Estudiante eliminado permanentemente");
+
+        return ResponseEntity.ok(response);
     }
 
-    @Override
-    public ResponseEntity<Map<String, Object>> eliminarEstudiante(Long id) {
-        return null;
-    }
 }

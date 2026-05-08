@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -22,6 +23,7 @@ public class Estudiante {
     private String celular;
     private String email;
     private Date fechaNacimiento;
-    private Timestamp fechaRegistro;
+    @Column(insertable = false, updatable = false)
+    private LocalDateTime fechaRegistro;
     private String estado;
 }
