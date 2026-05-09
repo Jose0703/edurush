@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Detalles de Aula</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card card-edurush text-center p-4">
+
+                    <div class="my-3">
+                        <i class="fas fa-door-open fa-4x text-primary shadow-sm rounded-circle p-3 bg-light"></i>
+                    </div>
+
+                    <h3 class="fw-bold mb-0" th:text="${aula.codigo}"></h3>
+                    <p class="text-muted mb-4">Información del aula</p>
+
+                    <ul class="list-group list-group-flush text-start mb-4">
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">ID Aula:</span>
+                            <span th:text="${aula.idAula}"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Código:</span>
+                            <span class="fw-bold text-primary" th:text="${aula.codigo}"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Capacidad:</span>
+                            <span th:text="${aula.capacidad}"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Estado actual:</span>
+                            <span class="badge py-2 px-3"
+                                  th:classappend="${aula.estado == 'disponible'} ? ' bg-success' : 
+                                                  (${aula.estado == 'mantenimiento'} ? ' bg-warning text-dark' : ' bg-secondary')"
+                                  th:text="${aula.estado}">
+                            </span>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a th:href="@{/admin/aulas/editar/{id}(id=${aula.idAula})}"
+                           class="btn btn-primary">
+                            Editar Aula
+                        </a>
+
+                        <a th:href="@{/admin/aulas}"
+                           class="btn btn-outline-primary">
+                            Volver al Listado
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
