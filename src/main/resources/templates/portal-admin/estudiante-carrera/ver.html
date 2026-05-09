@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Detalles de Asignación</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card card-edurush text-center p-4">
+                    <div class="my-3">
+                        <i class="fas fa-graduation-cap fa-4x text-primary shadow-sm rounded-circle p-3 bg-light"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0" th:text="${ec.estudiante.nombres + ' ' + ec.estudiante.apellidos}"></h3>
+                    <p class="text-muted mb-4" th:text="${'Carrera: ' + ec.carrera.nombre}"></p>
+                    
+                    <ul class="list-group list-group-flush text-start mb-4">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">DNI:</span>
+                            <span class="fw-bold" th:text="${ec.estudiante.dni}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Fecha Ingreso:</span>
+                            <span th:text="${#temporals.format(ec.fechaIngreso, 'dd/MM/yyyy HH:mm')}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Estado:</span>
+                            <span class="badge bg-success py-2 px-3 text-capitalize" th:text="${ec.estado}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">ID Asignación:</span>
+                            <span th:text="${ec.idEstudianteCarrera}"></span>
+                        </li>
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a th:href="@{/admin/estudiante-carrera/editar/{id}(id=${ec.idEstudianteCarrera})}" class="btn btn-warning">
+                            <i class="fas fa-edit me-1"></i> Editar Asignación
+                        </a>
+                        <a th:href="@{/admin/estudiante-carrera}" class="btn btn-outline-primary">Volver al Listado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
