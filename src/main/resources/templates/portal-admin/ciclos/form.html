@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Formulario Ciclo</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card card-edurush">
+                    <div class="card-header bg-white border-0 pt-4">
+                        <h4 class="fw-bold text-center text-primary" th:text="${titulo}"></h4>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/ciclos/guardar}"
+                              th:object="${ciclo}"
+                              method="post">
+
+                            <input type="hidden" th:field="*{idCiclo}">
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Plan de Estudio</label>
+                                <select th:field="*{planEstudio.idPlanEstudio}"
+                                        class="form-select form-select-lg"
+                                        required>
+                                    <option value="">Seleccione un plan</option>
+
+                                    <option th:each="p : ${planes}"
+                                            th:value="${p.idPlanEstudio}"
+                                            th:text="${p.nombre + ' - ' + p.carrera.nombre}">
+                                    </option>
+                                </select>
+
+                                <small class="text-muted">
+                                    El ciclo quedará vinculado al plan de estudio seleccionado.
+                                </small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Número de Ciclo</label>
+                                <input type="number"
+                                       th:field="*{numeroCiclo}"
+                                       class="form-control form-control-lg"
+                                       placeholder="Ej. 1"
+                                       min="1"
+                                       required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Estado</label>
+                                <select th:field="*{estado}" class="form-select form-select-lg text-capitalize">
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                    Guardar Ciclo
+                                </button>
+
+                                <a th:href="@{/admin/ciclos}" class="btn btn-link text-decoration-none">
+                                    Regresar
+                                </a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>

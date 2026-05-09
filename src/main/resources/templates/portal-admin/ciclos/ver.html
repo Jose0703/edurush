@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Detalles del Ciclo</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-edurush text-center p-4">
+
+                    <div class="my-3">
+                        <i class="fas fa-sync-alt fa-4x text-primary shadow-sm rounded-circle p-3 bg-light"></i>
+                    </div>
+
+                    <h3 class="fw-bold mb-0" th:text="${'Ciclo ' + ciclo.numeroCiclo}"></h3>
+                    <p class="text-muted mb-4">Información del ciclo académico</p>
+
+                    <ul class="list-group list-group-flush text-start mb-4">
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">ID Ciclo:</span>
+                            <span th:text="${ciclo.idCiclo}"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Plan de estudio:</span>
+                            <span class="fw-bold text-primary"
+                                  th:text="${ciclo.planEstudio != null ? ciclo.planEstudio.nombre : 'Sin plan'}">
+                            </span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Carrera:</span>
+                            <span th:text="${ciclo.planEstudio != null && ciclo.planEstudio.carrera != null ? ciclo.planEstudio.carrera.nombre : 'Sin carrera'}"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Número de ciclo:</span>
+                            <span class="fw-bold" th:text="${ciclo.numeroCiclo}"></span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Estado actual:</span>
+                            <span class="badge py-2 px-3"
+                                  th:classappend="${ciclo.estado == 'activo'} ? ' bg-success' : ' bg-secondary'"
+                                  th:text="${ciclo.estado}">
+                            </span>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-grid gap-2">
+                        <a th:href="@{/admin/ciclos/editar/{id}(id=${ciclo.idCiclo})}"
+                           class="btn btn-primary">
+                            Editar Ciclo
+                        </a>
+
+                        <a th:href="@{/admin/ciclos}"
+                           class="btn btn-outline-primary">
+                            Volver al Listado
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
