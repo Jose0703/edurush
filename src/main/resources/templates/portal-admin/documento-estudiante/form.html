@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Formulario Documento</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-edurush">
+                    <div class="card-header bg-white border-0 pt-4">
+                        <h4 class="fw-bold text-center text-primary" th:text="${titulo}"></h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/documentos/guardar}" th:object="${documento}" method="post">
+                            <input type="hidden" th:field="*{idDocumento}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Estudiante</label>
+                                <select th:field="*{estudiante}" class="form-select form-control-lg">
+                                    <option th:each="e : ${estudiantes}" th:value="${e.idEstudiante}" 
+                                            th:text="${e.dni + ' - ' + e.nombres + ' ' + e.apellidos}"></option>
+                                </select>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Tipo Documento</label>
+                                    <select th:field="*{tipo}" class="form-select">
+                                        <option value="DNI">DNI</option>
+                                        <option value="Certificado">Certificado</option>
+                                        <option value="Foto">Foto Carnet</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Estado</label>
+                                    <select th:field="*{estado}" class="form-select text-capitalize">
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="validado">Validado</option>
+                                        <option value="rechazado">Rechazado</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Ruta del Archivo (Simulado)</label>
+                                <input type="text" th:field="*{rutaArchivo}" class="form-control" placeholder="/uploads/estudiante/dni.pdf" required>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">Guardar Documento</button>
+                                <a th:href="@{/admin/documentos}" class="btn btn-link text-decoration-none">Regresar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
