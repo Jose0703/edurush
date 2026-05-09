@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Ficha de Matrícula</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-edurush text-center p-4">
+                    <div class="my-3 text-primary">
+                        <i class="fas fa-file-signature fa-4x shadow-sm rounded-circle p-3 bg-light"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0">Ficha de Matrícula</h3>
+                    <p class="text-muted" th:text="${'ID Sistema: #' + m.idMatricula}"></p>
+                    
+                    <div class="rounded-table-container bg-white p-3 text-start mb-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-secondary fw-bold">Estudiante:</span>
+                                <span th:text="${m.estudianteCarrera.estudiante.nombres + ' ' + m.estudianteCarrera.estudiante.apellidos}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-secondary fw-bold">Carrera:</span>
+                                <span th:text="${m.estudianteCarrera.carrera.nombre}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-secondary fw-bold">Periodo:</span>
+                                <span th:text="${m.periodo.nombre}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-secondary fw-bold">Ciclo Actual:</span>
+                                <span class="fw-bold text-primary" th:text="${m.ciclo}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-secondary fw-bold">Fecha Registro:</span>
+                                <span th:text="${#temporals.format(m.fecha, 'dd/MM/yyyy HH:mm')}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span class="text-secondary fw-bold">Estado:</span>
+                                <span th:class="${m.estado == 'matriculado' ? 'badge bg-success py-2 px-3' : 'badge bg-warning text-dark py-2 px-3'}" 
+                                      th:text="${m.estado}"></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <a th:href="@{/admin/matriculas/editar/{id}(id=${m.idMatricula})}" class="btn btn-warning">
+                            <i class="fas fa-edit me-1"></i> Editar Información
+                        </a>
+                        <a th:href="@{/admin/matriculas}" class="btn btn-outline-primary">Volver al Listado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
