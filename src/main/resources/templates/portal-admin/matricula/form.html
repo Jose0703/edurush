@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Formulario de Matrícula</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-edurush">
+                    <div class="card-header bg-white border-0 pt-4 text-center">
+                        <h4 class="fw-bold text-primary" th:text="${titulo}"></h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/matriculas/guardar}" th:object="${matricula}" method="post">
+                            <input type="hidden" th:field="*{idMatricula}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Inscripción del Estudiante (Carrera)</label>
+                                <select th:field="*{estudianteCarrera}" class="form-select form-control-lg" required>
+                                    <option value="" hidden>-- Seleccione la inscripción --</option>
+                                    <option th:each="ec : ${estudianteCarreras}" th:value="${ec.idEstudianteCarrera}" 
+                                            th:text="${ec.estudiante.dni + ' - ' + ec.estudiante.nombres + ' (' + ec.carrera.nombre + ')'}"></option>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Periodo Académico</label>
+                                    <select th:field="*{periodo}" class="form-select" required>
+                                        <option value="" hidden>-- Seleccione periodo --</option>
+                                        <option th:each="p : ${periodos}" th:value="${p.idPeriodo}" th:text="${p.nombre}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Ciclo</label>
+                                    <input type="number" th:field="*{ciclo}" class="form-control" placeholder="Ej: 1" required min="1">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Estado de Matrícula</label>
+                                <select th:field="*{estado}" class="form-select text-capitalize">
+                                    <option value="pre_matriculado">Pre-Matriculado</option>
+                                    <option value="matriculado">Matriculado</option>
+                                    <option value="finalizado">Finalizado</option>
+                                    <option value="retirado">Retirado</option>
+                                    <option value="congelado">Congelado</option>
+                                </select>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">Procesar Matrícula</button>
+                                <a th:href="@{/admin/matriculas}" class="btn btn-link text-decoration-none">Regresar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
