@@ -9,4 +9,6 @@ public interface PeriodoService {
     Periodo guardar(Periodo periodo);
     Periodo buscarPorId(Integer id);
     void eliminarLogico(Integer id);
+    
+    //Realizado por Mechato
 }

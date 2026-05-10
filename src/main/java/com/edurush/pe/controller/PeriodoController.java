@@ -14,6 +14,8 @@ public class PeriodoController {
     @Autowired
     private PeriodoService periodoService;
 
+    //Realizado por Mechato
+    
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("periodos", periodoService.listarVigentes());

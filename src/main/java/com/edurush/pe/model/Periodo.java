@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 public class Periodo {
 
+	//Realizado por Mechato
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPeriodo;
