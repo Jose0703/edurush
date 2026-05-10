@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Detalles de Orden</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-edurush text-center p-4">
+                    <div class="my-3 text-primary">
+                        <i class="fas fa-file-invoice-dollar fa-4x shadow-sm rounded-circle p-3 bg-light"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0">Detalle de Orden de Pago</h3>
+                    <p class="text-muted" th:text="${'ID Sistema: #' + o.idOrdenPago}"></p>
+                    <hr>
+                    
+                    <div class="text-start px-3">
+                        <p><strong>Estudiante:</strong> <span th:text="${o.estudiante.nombres + ' ' + o.estudiante.apellidos}"></span></p>
+                        <p><strong>Matrícula Relacionada:</strong> <span th:text="${'#' + o.matricula.idMatricula + ' - ' + o.matricula.estudianteCarrera.carrera.nombre}"></span></p>
+                        <p><strong>Concepto:</strong> <span th:text="${o.descripcion}"></span></p>
+                        <p><strong>Monto Total:</strong> <span class="fs-5 fw-bold text-success" th:text="${'S/ ' + #numbers.formatDecimal(o.montoTotal, 1, 2)}"></span></p>
+                        <p><strong>Fecha Emisión:</strong> <span th:text="${#temporals.format(o.fechaEmision, 'dd/MM/yyyy HH:mm')}"></span></p>
+                        <p><strong>Fecha Vencimiento:</strong> <span th:text="${#temporals.format(o.fechaVencimiento, 'dd/MM/yyyy HH:mm')}"></span></p>
+                        <p><strong>Estado Actual:</strong> 
+                            <span th:class="${o.estado == 'pagado' ? 'badge bg-success py-2 px-3' : 'badge bg-warning text-dark py-2 px-3'}" 
+                                  th:text="${o.estado}"></span>
+                        </p>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a th:href="@{/admin/ordenes-pago/editar/{id}(id=${o.idOrdenPago})}" class="btn btn-warning">
+                            <i class="fas fa-edit me-1"></i> Editar Orden
+                        </a>
+                        <a th:href="@{/admin/ordenes-pago}" class="btn btn-outline-primary">Volver al Listado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Formulario Orden de Pago</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-edurush">
+                    <div class="card-header bg-white border-0 pt-4 text-center">
+                        <h4 class="fw-bold text-primary" th:text="${titulo}"></h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/ordenes-pago/guardar}" th:object="${orden}" method="post">
+                            <input type="hidden" th:field="*{idOrdenPago}">
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Estudiante</label>
+                                    <select th:field="*{estudiante}" class="form-select" required>
+                                        <option value="" hidden>-- Seleccionar --</option>
+                                        <option th:each="e : ${estudiantes}" th:value="${e.idEstudiante}" 
+                                                th:text="${e.dni + ' - ' + e.nombres + ' ' + e.apellidos}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Matrícula Asociada</label>
+                                    <select th:field="*{matricula}" class="form-select" required>
+                                        <option value="" hidden>-- Seleccionar --</option>
+                                        <option th:each="m : ${matriculas}" th:value="${m.idMatricula}" 
+                                                th:text="${'Matrícula #' + m.idMatricula + ' (' + m.estudianteCarrera.carrera.nombre + ')'}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">Descripción / Concepto</label>
+                                <input type="text" th:field="*{descripcion}" class="form-control" placeholder="Ej: Pago de Matrícula 2026-I" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Monto Total (S/)</label>
+                                    <input type="number" step="0.01" th:field="*{montoTotal}" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Estado</label>
+                                    <select th:field="*{estado}" class="form-select text-capitalize">
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="pagado">Pagado</option>
+                                        <option value="vencido">Vencido</option>
+                                        <option value="anulado">Anulado</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Fecha Emisión</label>
+                                    <input type="datetime-local" th:field="*{fechaEmision}" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold text-secondary">Fecha Vencimiento</label>
+                                    <input type="datetime-local" th:field="*{fechaVencimiento}" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">Guardar Orden</button>
+                                <a th:href="@{/admin/ordenes-pago}" class="btn btn-link text-decoration-none">Regresar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
