@@ -10,6 +10,7 @@ import com.edurush.pe.service.PeriodoService;
 @Service
 public class PeriodoServiceImpl implements PeriodoService {
 
+	//Realizado por Mechato
     @Autowired
     private PeriodoRepository periodoRepo;
 
