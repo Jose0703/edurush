@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Detalles del Documento</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card card-edurush text-center p-4">
+                    <div class="my-3">
+                        <i class="fas fa-file-alt fa-4x text-primary shadow-sm rounded-circle p-3 bg-light"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0" th:text="${documento.tipo}"></h3>
+                    <p class="text-muted mb-4">Información del documento cargado</p>
+                    
+                    <ul class="list-group list-group-flush text-start mb-4">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Estudiante:</span>
+                            <span class="fw-bold" th:text="${documento.estudiante.nombres + ' ' + documento.estudiante.apellidos}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-secondary">Estado actual:</span>
+                            <span th:class="${documento.estado == 'validado' ? 'badge bg-success' : 'badge bg-warning text-dark'}" 
+                                  th:text="${documento.estado}"></span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-secondary d-block">Ruta de almacenamiento:</span>
+                            <code class="text-break" th:text="${documento.rutaArchivo}"></code>
+                        </li>
+                    </ul>
+
+                    <div class="d-grid">
+                        <a th:href="@{/admin/documentos}" class="btn btn-outline-primary">Volver al Listado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
