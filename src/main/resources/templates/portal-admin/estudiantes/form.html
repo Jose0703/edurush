@@ -29,20 +29,29 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label fw-bold text-secondary">DNI</label>
-                                    <input type="text" th:field="*{dni}" class="form-control" maxlength="8" required>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label fw-bold text-secondary">Celular</label>
-                                    <input type="text" th:field="*{celular}" class="form-control" maxlength="9" required>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label fw-bold text-secondary">ID Usuario (Relación)</label>
-                                    <input type="number" th:field="*{idUsuario}" class="form-control" required>
-                                </div>
-                            </div>
+							<div class="row">
+							    <div class="col-md-4 mb-3">
+							        <label class="form-label fw-bold text-secondary">DNI</label>
+							        <input type="text" th:field="*{dni}" class="form-control" maxlength="8" required>
+							    </div>
+							    <div class="col-md-4 mb-3">
+							        <label class="form-label fw-bold text-secondary">Celular</label>
+							        <input type="text" th:field="*{celular}" class="form-control" maxlength="9" required>
+							    </div>
+							    
+							    <div class="col-md-4 mb-3">
+							        <label class="form-label fw-bold text-secondary">Cuenta de Usuario</label>
+							        <select th:field="*{usuario.idUsuario}" class="form-select" required>
+							            <option value="" hidden>Seleccione cuenta...</option>
+							            <option th:each="u : ${usuarios}" 
+							                    th:value="${u.idUsuario}" 
+							                    th:text="${u.correo}"></option>
+							        </select>
+							        <small class="text-muted" th:if="${estudiante.idEstudiante != null}">
+							            Actual: <span th:text="${estudiante.usuario.correo}"></span>
+							        </small>
+							    </div>
+							</div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary">Correo Personal / Contacto</label>

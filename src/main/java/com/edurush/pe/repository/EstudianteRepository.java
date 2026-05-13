@@ -18,4 +18,6 @@ public interface EstudianteRepository extends JpaRepository<Estudiante, Integer>
     List<Estudiante> buscarPorNombreApellido(@Param("texto") String texto);
 
     List<Estudiante> findByEstado(String estado);
+    
+    boolean existsByDni(String dni);
 }

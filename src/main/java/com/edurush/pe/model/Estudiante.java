@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -15,15 +14,22 @@ public class Estudiante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estudiante")
     private Integer idEstudiante;
-    @Column(name = "id_usuario")
-    private int idUsuario;
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario; 
+
     private String nombres;
     private String apellidos;
     private String dni;
     private String celular;
     private String email;
+    
+    @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
-    @Column(insertable = false, updatable = false)
+    
+    @Column(name = "fecha_registro", insertable = false, updatable = false)
     private LocalDateTime fechaRegistro;
-    private String estado;
+
+    private String estado = "activo";
 }

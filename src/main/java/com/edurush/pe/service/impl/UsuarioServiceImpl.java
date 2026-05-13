@@ -45,4 +45,9 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioRepo.save(u);
         }
     }
+    
+    @Override
+    public List<Usuario> listarUsuariosEstudiantesSinAsignar() {
+        return usuarioRepo.findEstudiantesSinAsignar();
+    }
 }

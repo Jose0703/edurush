@@ -8,4 +8,6 @@ public interface UsuarioService {
     Usuario guardar(Usuario usuario);
     Usuario buscarPorId(Integer id);
     void eliminar(Integer id);
+    
+    List<Usuario> listarUsuariosEstudiantesSinAsignar();
 }

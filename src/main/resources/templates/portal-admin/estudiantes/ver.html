@@ -26,10 +26,10 @@
                             <span class="text-secondary">Celular:</span>
                             <span th:text="${estudiante.celular}"></span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span class="text-secondary">ID Usuario Vinculado:</span>
-                            <span class="badge bg-secondary" th:text="${estudiante.idUsuario}"></span>
-                        </li>
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+						    <span class="text-secondary"><i class="fas fa-id-badge me-2"></i>Cuenta Institucional:</span>
+						    <span class="fw-bold text-primary" th:text="${estudiante.usuario.correo}"></span>
+						</li>
                         <li class="list-group-item d-flex justify-content-between">
                             <span class="text-secondary">Estado:</span>
                             <span th:classappend="${estudiante.estado == 'activo' ? 'bg-success' : 'bg-danger'}" 
