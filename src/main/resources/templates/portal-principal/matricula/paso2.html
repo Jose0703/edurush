@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Matrícula | Paso 2</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body class="bg-light">
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-4 pb-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-10">
+                <div class="d-flex justify-content-between text-center position-relative">
+                    <div class="position-absolute top-50 start-0 translate-middle-y w-100 bg-secondary opacity-25" style="height: 3px; z-index: 0;"></div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;">
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <small class="fw-bold text-success d-block mt-2">CARRERA</small>
+                    </div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;">
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto shadow" style="width: 50px; height: 50px;">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <small class="fw-bold text-primary d-block mt-2">DATOS</small>
+                    </div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;"><div class="rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;"><span class="text-muted">3</span></div><small class="text-muted d-block mt-2">PAGO</small></div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;"><div class="rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;"><span class="text-muted">4</span></div><small class="text-muted d-block mt-2">FIN</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-edurush border-0 shadow-lg p-4">
+                    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                    <form th:action="@{/matricula/paso2}" th:object="${matriculaDto}" method="post">
+                        <h5 class="fw-bold text-secondary mb-4 border-bottom pb-2">Información del Postulante</h5>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold">Nombres</label>
+                                <input type="text" th:field="*{nombres}" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold">Apellidos</label>
+                                <input type="text" th:field="*{apellidos}" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold">DNI</label>
+                                <input type="text" th:field="*{dni}" class="form-control" maxlength="8" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold">Celular</label>
+                                <input type="text" th:field="*{celular}" class="form-control" maxlength="9" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold">Fecha Nacimiento</label>
+                                <input type="date" th:field="*{fechaNacimiento}" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold">Correo Electrónico Personal</label>
+                            <input type="email" th:field="*{emailPersonal}" class="form-control" required>
+                        </div>
+                        <div class="d-flex justify-content-between pt-3 border-top">
+                            <a th:href="@{/matricula/paso1}" class="btn btn-light px-4 border">Regresar</a>
+                            <button type="submit" class="btn btn-primary px-5 shadow-sm">Siguiente Paso <i class="fas fa-chevron-right ms-2"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
