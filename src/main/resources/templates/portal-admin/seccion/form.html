@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EduRush | Formulario Sección</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body>
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card card-edurush">
+                    <div class="card-header bg-white border-0 pt-4 text-center"><h4 class="fw-bold text-primary" th:text="${titulo}"></h4></div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/secciones/guardar}" th:object="${seccion}" method="post">
+                            <input type="hidden" th:field="*{idSeccion}">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Curso</label>
+                                <select th:field="*{curso}" class="form-select" required>
+                                    <option th:each="c : ${cursos}" th:value="${c.idCurso}" th:text="${c.nombre}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Periodo Académico</label>
+                                <select th:field="*{periodo}" class="form-select" required>
+                                    <option th:each="p : ${periodos}" th:value="${p.idPeriodo}" th:text="${p.nombre}"></option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Código de Sección</label>
+                                    <input type="text" th:field="*{codigo}" class="form-control" placeholder="Ej: S01" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Cupo Total</label>
+                                    <input type="number" th:field="*{cupoTotal}" class="form-control" required min="1">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Estado</label>
+                                <select th:field="*{estado}" class="form-select">
+                                    <option value="activo">Activo</option>
+                                    <option value="lleno">Lleno</option>
+                                </select>
+                            </div>
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg">Guardar Sección</button>
+                                <a th:href="@{/admin/secciones}" class="btn btn-link text-decoration-none text-muted">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
