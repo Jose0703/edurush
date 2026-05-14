@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Matrícula | Paso 3</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body class="bg-light">
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-4 pb-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-10">
+                <div class="d-flex justify-content-between text-center position-relative">
+                    <div class="position-absolute top-50 start-0 translate-middle-y w-100 bg-secondary opacity-25" style="height: 3px; z-index: 0;"></div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;"><div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;"><i class="fas fa-check"></i></div><small class="fw-bold text-success d-block mt-2">CARRERA</small></div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;"><div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;"><i class="fas fa-check"></i></div><small class="fw-bold text-success d-block mt-2">DATOS</small></div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;">
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto shadow" style="width: 50px; height: 50px;">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <small class="fw-bold text-primary d-block mt-2">PAGO</small>
+                    </div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;"><div class="rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;"><span class="text-muted">4</span></div><small class="text-muted d-block mt-2">FIN</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-edurush border-0 shadow-lg p-4 text-center">
+                    <p class="text-muted mb-1 text-uppercase small fw-bold">Monto a pagar</p>
+                    <h1 class="fw-bold text-primary mb-4" th:text="${'S/ ' + #numbers.formatDecimal(matriculaDto.montoTotal, 1, 2)}"></h1>
+                    
+                    <form th:action="@{/matricula/paso3}" th:object="${matriculaDto}" method="post" class="text-start">
+                        <div class="list-group mb-4">
+                            <label class="list-group-item d-flex gap-3 py-3 shadow-sm border-2 rounded mb-2">
+                                <input class="form-check-input flex-shrink-0" type="radio" th:field="*{metodoPago}" value="Tarjeta" checked>
+                                <span><strong class="d-block">Tarjeta Bancaria</strong><small class="text-muted">Visa, Mastercard, Amex</small></span>
+                                <i class="fab fa-cc-visa ms-auto fa-2x text-primary"></i>
+                            </label>
+                            <label class="list-group-item d-flex gap-3 py-3 shadow-sm border-2 rounded">
+                                <input class="form-check-input flex-shrink-0" type="radio" th:field="*{metodoPago}" value="Yape">
+                                <span><strong class="d-block">Yape / Transferencia</strong><small class="text-muted">Confirmación inmediata</small></span>
+                                <i class="fas fa-qrcode ms-auto fa-2x text-success"></i>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg w-100 shadow">
+                            FINALIZAR MATRÍCULA <i class="fas fa-check-double ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Matrícula | Paso 1</title>
+    <th:block th:replace="~{fragments/layout :: head_imports}"></th:block>
+</head>
+<body class="bg-light">
+    <div th:replace="~{fragments/layout :: navbar_principal}"></div>
+
+    <div class="container mt-4 pb-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-10">
+                <div class="d-flex justify-content-between text-center position-relative">
+                    <div class="position-absolute top-50 start-0 translate-middle-y w-100 bg-secondary opacity-25" style="height: 3px; z-index: 0;"></div>
+                    
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;">
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto shadow" style="width: 50px; height: 50px;">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <small class="fw-bold text-primary d-block mt-2">CARRERA</small>
+                    </div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;">
+                        <div class="rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;">
+                            <span class="text-muted">2</span>
+                        </div>
+                        <small class="text-muted d-block mt-2">DATOS</small>
+                    </div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;">
+                        <div class="rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;">
+                            <span class="text-muted">3</span>
+                        </div>
+                        <small class="text-muted d-block mt-2">PAGO</small>
+                    </div>
+                    <div class="bg-light px-2 position-relative" style="z-index: 1;">
+                        <div class="rounded-circle bg-white border border-2 d-flex align-items-center justify-content-center mx-auto" style="width: 50px; height: 50px;">
+                            <span class="text-muted">4</span>
+                        </div>
+                        <small class="text-muted d-block mt-2">FIN</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-edurush border-0 shadow-lg p-4">
+                    <h3 class="fw-bold text-center mb-4">Nueva Matrícula</h3>
+                    <form th:action="@{/matricula/paso1}" th:object="${matriculaDto}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Carrera Profesional</label>
+                            <select th:field="*{idCarrera}" class="form-select border-2" required>
+                                <option value="" hidden>Seleccione una opción...</option>
+                                <option th:each="c : ${carreras}" th:value="${c.idCarrera}" th:text="${c.nombre}"></option>
+                            </select>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Turno</label>
+                                <select th:field="*{turno}" class="form-select border-2">
+                                    <option value="mañana">Mañana</option>
+                                    <option value="tarde">Tarde</option>
+                                    <option value="noche">Noche</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Modalidad</label>
+                                <select th:field="*{modalidad}" class="form-select border-2">
+                                    <option value="presencial">Presencial</option>
+                                    <option value="virtual">Virtual</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-4 shadow-sm">
+                            Continuar <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/layout :: scripts_imports}"></div>
+</body>
+</html>
